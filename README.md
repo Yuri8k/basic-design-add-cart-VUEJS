@@ -1,1 +1,1 @@
-# Projeto de animação avançado, Objetivo é mostrar animações avançadas que se pode usar com JS e css PURO
+# Projeto básico de Vuejs, projeto feito com API de produtos fake, apenas para mostrar produtos e adições deles em um carrinho, projeto totalmente com tratativas de estoque e um carrinho real de ecommerce
