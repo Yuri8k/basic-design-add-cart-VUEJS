@@ -1,0 +1,49 @@
+@media screen and (max-width: 900px) {
+    .produtos {
+        margin-top: 40px;
+        .product {
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 300px;
+            margin: 30px auto;
+
+            &__info {
+                padding: 20px;
+
+                .product-title {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+    .modal {
+        padding: 10px;
+
+        &__container {
+            gap: 20px;
+            background: #fff;
+            padding: 10px;
+
+            .modal-img {
+                grid-row: 2;
+                width: 100%;
+                margin-top: 0;
+                img {
+                    width: 100%;
+                    display: block;
+                }
+            }
+            .modal-dados {
+                grid-column: 1;
+                padding: 10px;
+                .modal-btn {
+                    margin-top: 20px;
+                }
+            }
+            .avaliations {
+                grid-column: 1;
+                padding: 10px;
+            }
+        }
+    }
+}

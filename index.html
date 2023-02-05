@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="slick-1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <title>Projeto Vue</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <section class="carrinho-modal" :class="{active: carrinhoActive}" @click="clickForaCarrinho">
+            <div class="carrinho_modal__container">
+                <button class="carrinho_fechar" @click="carrinhoActive = false">X</button>
+                <h2 class="carrinho_titulo">Carrinho</h2>
+                <div v-if="carrinho.length > 0">
+                    <ul class="carrinho_lista">
+                        <li v-for="(item, index) in carrinho" class="carrinho_item">
+                            <p>{{ item.nome }}</p>
+                            <p class="carrinho_preco"> {{ item.preco | numberForPrice }} </p>
+                            <button class="carrinho_remover" @click="removerItem(index)">X</button>
+                        </li>
+                    </ul>
+                    <p class="carrinho_total">{{ carrinhoTotal | numberForPrice }}</p>
+                    <button class="carrinho_finalizar">Finalizar Compra</button>
+                </div>
+                <p v-else>O carrinho está vazio.</p>
+            </div>
+        </section>
+
+        <header class="header">
+            <img class="logo" src="./images/techno.svg" alt="logo">
+            <div class="carrinho_menu" @click="carrinhoActive = !carrinhoActive">
+                {{carrinhoTotal | numberForPrice}} | {{carrinho.length}}
+            </div>
+        </header>
+
+        <section v-if="produto" class="modal" @click="fecharModal">
+            <div class="modal__container">
+                <figure class="modal-img">
+                    <img :src="produto.img" :alt="produto.nome">
+                </figure>
+                <div class="modal-dados">
+                    <button class="modal-fechar" @click="produto = false">x</button>
+                    <span class="modal-price">{{ produto.preco | numberForPrice}}</span>
+                    <h2 class="modal-title">{{ produto.nome }}</h2>
+                    <p class="description">{{ produto.descricao }}</p>
+                    <button v-if="produto.estoque > 0" class="modal-btn" @click="adicionarItem">Adicionar item</button>
+                    <button v-else class="modal-btn esgotado" disabled @click="adicionarItem">Produto Esgotado</button>
+                </div>
+                <div class="avaliations">
+                    <h2 class="avaliations__subtitle">Avaliações</h2>
+                    <ul>
+                        <li class="avaliations__people" v-for="avaliation in produto.reviews" v-if="avaliation">
+                            <p class="description">{{ avaliation.descricao }}</p>
+                            <p class="user">{{ avaliation.nome }} | {{ avaliation.estrelas }} </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="produtos">
+            <ul v-for="item in produtos" @click="abrirModal(item.id)" :key="item.id" class="product">
+                <figure class="product__figure">
+                    <img :src="item.img" :alt="item.id">
+                </figure>
+                <div class="product__info">
+                    <span class="product_preco">{{ item.preco | numberForPrice }}</span>
+                    <h2 class="product-title">{{ item.nome }}</h2>
+                </div>
+        </section>
+
+        <div class="alerta" :class="{active: alertaAtivo}">
+            <p class="alerta__mensagem">{{mensagemAlerta}}</p>
+        </div>
+    </div>
+
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/plugins.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
